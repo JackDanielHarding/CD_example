@@ -15,7 +15,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - ~/inventory.txt
+            - inventory.txt
   print_ansible_inventory:
     docker:
       - image: alpine:latest
