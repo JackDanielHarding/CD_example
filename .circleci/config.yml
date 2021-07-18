@@ -9,7 +9,6 @@ jobs:
     docker:
       - image: amazon/aws-cli
     steps: 
-      - run: echo $AWS_DEFAULT_REGION
       - aws-cli/setup:
           profile-name: admin
       - run: echo [all] > inventory
