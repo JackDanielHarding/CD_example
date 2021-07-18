@@ -33,4 +33,6 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - create_ansible_inventory
-      - print_ansible_inventory
+      - print_ansible_inventory:
+          requires: 
+            - create_ansible_inventory
