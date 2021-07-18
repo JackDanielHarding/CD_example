@@ -16,6 +16,14 @@ jobs:
           root: ~/
           paths:
             - inventory
+  print_ansible_inventory:
+    docker:
+      - image: alpine:latest
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: cat ~/inventory
+
 
 
 # Orchestrate or schedule a set of jobs
