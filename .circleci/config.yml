@@ -10,7 +10,7 @@ jobs:
     steps: 
       - aws-cli/setup:
           profile-name: admin
-      - run: aws cloudformation create-stack --stack-name "CD_example_stack" --template-body ./template.yml
+      - run: aws cloudformation create-stack --stack-name "CDExampleStack" --template-body ./template.yml
 
 # Orchestrate or schedule a set of jobs
 workflows:
