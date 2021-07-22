@@ -10,7 +10,7 @@ Resources:
         - !Ref InstanceSecurityGroup
       KeyName: admin-ec2
       InstanceType: t2.micro
-      ImageId: 'ami-01ee617c4327490d3' # you may need to find out what instance types are available in your region - use https://cloud-images.ubuntu.com/locator/ec2/
+      ImageId: 'ami-0dc8f589abe99f538' # you may need to find out what instance types are available in your region - use https://cloud-images.ubuntu.com/locator/ec2/
 
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
