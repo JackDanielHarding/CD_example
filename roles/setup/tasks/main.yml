@@ -1,12 +1,11 @@
 ---
 - name: "update apt packages."
   become: yes
-  shell: sudo apt-get update
+  shell: apt-get update
 
 - name: "upgrade packages"
   become: yes
-  apt:
-    upgrade: yes
+  shell: apt-get upgrade
 
 - name: remove dependencies that are no longer required
   become: yes
