@@ -5,34 +5,15 @@ orbs:
   aws-cli: circleci/aws-cli@2.0.3
 
 jobs:
-  create_ansible_inventory:
+  create_infrastructure:
     executor: aws-cli/default
     steps: 
       - aws-cli/setup:
           profile-name: admin
-      - run: echo [all] > ~/inventory.txt
-      - run: aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters "Name=tag:Project,Values=udacity" --output text >> ~/inventory.txt
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - inventory.txt
-  print_ansible_inventory:
-    docker:
-      - image: alpine:latest
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: cat ~/inventory.txt
-
-
+      - run: aws cloudformation create-stack --stack-name "CD_example_stack" --template-body ./template.yml
 
 # Orchestrate or schedule a set of jobs
 workflows:
-  # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
+  provision:
     jobs:
-      - create_ansible_inventory
-      - print_ansible_inventory:
-          requires: 
-            - create_ansible_inventory
+      - create_infrastructure
