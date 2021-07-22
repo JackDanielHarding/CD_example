@@ -1,8 +1,7 @@
 ---
 - name: "update apt packages."
   become: yes
-  apt:
-    update_cache: yes
+  shell: sudo apt-get update
 
 - name: "upgrade packages"
   become: yes
