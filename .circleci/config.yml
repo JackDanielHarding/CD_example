@@ -12,9 +12,25 @@ jobs:
           profile-name: admin
       - checkout
       - run: aws cloudformation create-stack --stack-name "CDExampleStack" --template-body file://./template.yml
+  
+  deploy_web_server:
+    docker: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: ["87:f6:4c:29:f5:c8:d1:17:1b:cd:c1:61:a6:ba:e4:e1"] # You can get this ID in the section where you registered the SSH Key
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --update ansible # install the dependencies needed for your playbook
+      - run:
+          name: Configure server
+          command: |
+            ansible-playbook -i inventory.txt main.yml
+
 
 # Orchestrate or schedule a set of jobs
 workflows:
   provision:
     jobs:
-      - create_infrastructure
+      - deploy_web_server
