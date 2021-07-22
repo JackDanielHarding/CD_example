@@ -1,2 +1,2 @@
 [all]
-52.42.94.154 ansible_python_interpreter=/usr/bin/python3
+52.24.8.87 ansible_python_interpreter=/usr/bin/python3
