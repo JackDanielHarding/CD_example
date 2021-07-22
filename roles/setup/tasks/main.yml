@@ -13,6 +13,10 @@
   apt:
     autoremove: yes
 
+- name: "Setup correct apt repo"
+  become: yes
+  shell: curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+
 - name: "install dependencies."
   become: yes
   shell: sudo apt-get install -y nodejs npm
