@@ -11,8 +11,11 @@ jobs:
       - aws-cli/setup:
           profile-name: admin
       - checkout
-      - run: aws cloudformation create-stack --stack-name "CDExampleStack" --template-body file://./template.yml
-  
+      - run: aws cloudformation deploy --stack-name "CDExampleStack" --template-body file://./template.yml
+      - run: return 1
+      - run: aws cloudformation delete-stack --stack-name "CDExampleStack"
+        when: on_fail
+
   deploy_web_server:
     docker: 
        - image: python:3.7-alpine3.11
@@ -40,4 +43,4 @@ jobs:
 workflows:
   provision:
     jobs:
-      - smoke_test
+      - create_infrastructure
