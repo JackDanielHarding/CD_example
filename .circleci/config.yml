@@ -2,7 +2,7 @@
 version: 2.1
 # Use a package of configuration called an orb.
 orbs:
-  aws-cli: circleci/aws-cli@2.0.3
+  aws-cli: circleci/aws-cli@2.0.3     
 
 jobs:
   create_infrastructure:
@@ -11,10 +11,12 @@ jobs:
       - aws-cli/setup:
           profile-name: admin
       - checkout
-      - run: aws cloudformation deploy --stack-name "CDExampleStack" --template-body file://./template.yml
+      - run: aws cloudformation deploy --stack-name "CDExampleStack" --template-file template.yml
       - run: return 1
-      - run: aws cloudformation delete-stack --stack-name "CDExampleStack"
-        when: on_fail
+      - run: 
+          name: Destroy Infrastructure
+          command: aws cloudformation delete-stack --stack-name "CDExampleStack"
+          when: on_fail
 
   deploy_web_server:
     docker: 
