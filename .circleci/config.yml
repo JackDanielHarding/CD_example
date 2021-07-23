@@ -29,9 +29,15 @@ jobs:
           command: |
             ansible-playbook -i inventory.txt main.yml
 
+  smoke_test:
+    docker: 
+      - image: alpine:latest
+    steps:
+      - run: curl -s --head "https://google333.com"
+
 
 # Orchestrate or schedule a set of jobs
 workflows:
   provision:
     jobs:
-      - deploy_web_server
+      - smoke_test
